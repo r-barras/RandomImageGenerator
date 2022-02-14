@@ -11,34 +11,34 @@ w, h = 42, 42
 #print('w, h, area: ' + str(w) + ', ' + str(h) + ', ' + str(w*h))
 
 def image_generator(list_name, numpy_images):
-    total_circles = random.randint(0, 5)
-    circle_collection = []
+    total_squares = random.randint(0, 5)
+    square_collection = []
     i = 0
 
     img = Image.new('L', (w,h), 'black')
     draw = ImageDraw.Draw(img)
 
-    while i < total_circles:
+    while i < total_squares:
         rx = random.randint(0,42)
         ry = random.randint(0,42)
         rn = random.randint(2,5)
-        circle_area = []
+        square_area = []
         for n in range(rn):
-            circle_area.extend([rx+n])
-            circle_area.extend([ry+n])
+            square_area.extend([rx+n])
+            square_area.extend([ry+n])
 
         if (rx+n >= 42) or (ry+n >= 42):
             continue
-        elif any(x in circle_area for x in circle_collection):
+        elif any(x in square_area for x in square_collection):
             continue
-        elif not circle_collection:
-            circle_collection.extend(circle_area)
+        elif not square_collection:
+            square_collection.extend(square_area)
             draw.rectangle((rx,ry,rx+rn,ry+rn), fill='white')
         else:
-            circle_collection.extend(circle_area)
+            square_collection.extend(square_area)
             draw.rectangle((rx,ry,rx+rn,ry+rn), fill='white')
         i += 1
-    list_name.append(total_circles)
+    list_name.append(total_squares)
     img = np.array(img)
     numpy_images.append(img) #add .flatten() if needed later.
     #display(img)
